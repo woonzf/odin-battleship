@@ -9,6 +9,10 @@ class Board {
         this.mapAttacks = new Map();
     }
 
+    getShips() {
+        return this.ships;
+    }
+
     createShips() {
         const carrier = new Ship("Carrier", 5);
         const battleship = new Ship("Battleship", 4);

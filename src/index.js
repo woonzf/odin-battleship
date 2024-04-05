@@ -1,4 +1,4 @@
-const Board = require('../src/board.js');
+const Board = require('./board.js');
 
 const battleship = (() => {
     function run() {

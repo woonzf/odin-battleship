@@ -4,15 +4,14 @@ const ship = new Ship("Carrier", 5);
 ship.axis = "x";
 
 test('new Ship() OK', () => {
-    expect(ship)
-        .toEqual({
-            name: "Carrier",
-            length: 5,
-            axis: "x",
-            coordinates: null,
-            hp: 5,
-            alive: true
-        });
+    expect(ship).toEqual({
+                    name: "Carrier",
+                    length: 5,
+                    axis: "x",
+                    coordinates: null,
+                    hp: 5,
+                    alive: true
+                });
 })
 
 test('changeAxis() & getAxis() OK', () => {
@@ -26,9 +25,7 @@ test('getLength() OK', () => {
 
 test('setCoordinates() & getCoordinates() OK', () => {
     ship.setCoordinates([[0,0], [0,5]]);
-
-    expect(ship.getCoordinates())
-        .toEqual([[0,0], [0,5]]);
+    expect(ship.getCoordinates()).toEqual([[0,0], [0,5]]);
 })
 
 test('hit() & isSunk() OK', () => {

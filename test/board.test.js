@@ -2,8 +2,14 @@ const Board = require('../src/board.js');
 const Ship = require('../src/ship.js');
 
 const board = new Board();
-const ship = new Ship("Carrier", 5);
-ship.axis = "x";
+
+test('getShips() OK', () => {
+    const carrier = new Ship("Carrier", 5);
+    const battleship = new Ship("Battleship", 4);
+    
+    board.ships = [carrier, battleship];
+    expect(board.getShips()).toEqual([carrier, battleship]);
+})
 
 test('isValidCoordinates() OK', () => {
     board.mapShips = new Map();
