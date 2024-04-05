@@ -1,3 +1,5 @@
+import './style.css';
+
 const Player = require('./player.js');
 
 const battleship = (() => {
