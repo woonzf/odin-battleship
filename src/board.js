@@ -9,6 +9,10 @@ class Board {
         this.mapAttacks = new Map();
     }
 
+    getHeight() {
+        return this.height;
+    }
+
     getShips() {
         return this.ships;
     }

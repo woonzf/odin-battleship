@@ -3,6 +3,10 @@ const Ship = require('../src/ship.js');
 
 const board = new Board();
 
+test('getHeight() OK', () => {
+    expect(board.getHeight()).toBe(10);
+})
+
 test('getShips() OK', () => {
     const carrier = new Ship("Carrier", 5);
     const battleship = new Ship("Battleship", 4);
