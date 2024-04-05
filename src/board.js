@@ -5,8 +5,8 @@ class Board {
     constructor() {
         this.height = 10;
         this.ships = this.createShips();
-        this.map = new Map();
-        this.end = false;
+        this.mapShips = this.createMapShips();
+        this.mapAttacks = new Map();
     }
 
     createShips() {
@@ -19,22 +19,26 @@ class Board {
         return [carrier, battleship, destroyer, submarine, patrolBoat];
     }
 
-    setMap() {
+    createMapShips() {
+        const map = new Map();
+
         this.ships.forEach(ship => {
-            const coordinates = this.getCoordinates(ship);
+            const coordinates = this.getCoordinates(ship, map);
             ship.setCoordinates(coordinates);
             coordinates.forEach(coordinate => {
-                this.map.set(`${coordinate[0]}${coordinate[1]}`, ship);
+                map.set(`${coordinate[0]}${coordinate[1]}`, ship);
             })
         })
+
+        return map;
     }
 
-    getCoordinates(ship) {
+    getCoordinates(ship, map) {
         const axis = ship.getAxis();
         const length = ship.getLength();
         let coordinates = null;
 
-        while (!this.isValidCoordinates(coordinates)) {
+        while (!this.isValidCoordinates(coordinates, map)) {
             coordinates = this.generateCoordinates(axis, length);
         }
         
@@ -62,29 +66,47 @@ class Board {
         return coordinates;
     }
 
-    isValidCoordinates(coordinates) {
+    isValidCoordinates(coordinates, map) {
         if (coordinates === null) return false;
+
+        let mapShips = null;
+        if (arguments.length === 2) mapShips = map;
+        else mapShips = this.mapShips;
 
         let bool = [];
 
         coordinates.forEach(coordinate => {
             let x = coordinate[0];
             let y = coordinate[1];
-            if (this.isOutOfBound(coordinate) || this.map.has(`${x}${y}`)) bool.push(false);
+
+            if (this.isOutOfBound(x, y) || mapShips.has(`${x}${y}`)) {
+                bool.push(false);
+            }
         })
 
         if (bool.includes(false)) return false;
         return true;
     }
 
-    isOutOfBound([x, y]) {
+    isOutOfBound(x, y) {
         if (x > this.height - 1 || x < 0) return true;
         if (y > this.height - 1 || y < 0) return true;
         return false;
     }
 
-    receiveAttack() {
-        
+    isAttacked(x, y) {
+        if (this.mapAttacks.has(`${x}${y}`)) return true;
+        return false;
+    }
+
+    receiveAttack(x, y) {
+        const key = `${x}${y}`;
+        const ship = this.mapShips.get(key);
+
+        if (Boolean(ship)) {
+            ship.hit();
+            this.mapAttacks.set(key, 1);
+        } else this.mapAttacks.set(key, 0);
     }
 }
 
