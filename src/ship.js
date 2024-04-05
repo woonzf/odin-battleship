@@ -10,10 +10,6 @@ class Ship {
         this.alive = true;
     }
 
-    getAxis() {
-        return this.axis;
-    }
-
     setAxis() {
         const n = getRandomInt(2);
         if (n === 0) return "x";
@@ -23,14 +19,6 @@ class Ship {
     changeAxis() {
         if (this.axis === "x") this.axis = "y";
         else this.axis = "x";
-    }
-
-    getLength() {
-        return this.length;
-    }
-
-    getCoordinates() {
-        return this.coordinates;
     }
 
     setCoordinates(coordinates) {

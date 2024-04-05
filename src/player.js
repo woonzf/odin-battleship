@@ -5,12 +5,8 @@ class Player {
     constructor(name) {
         this.name = name;
         this.board = new Board();
-        this.ships = this.board.getShips();
+        this.ships = this.board.ships;
         this.life = this.ships.length;
-    }
-
-    getLife() {
-        return this.life;
     }
 
     updateLife() {
@@ -21,22 +17,24 @@ class Player {
         this.life = life;
     }
 
-    receiveAttack(x, y) {
+    receiveAttack([x, y]) {
         this.board.receiveAttack(x, y);
+        this.updateLife();
     }
 
     // AI
     giveAttack(map) {
         let attack = null;
         while (!this.isValidCoordinate(attack, map)) {
-            attack = generateAttack();
+            attack = this.generateAttack();
         }
         return attack;
     }
 
     generateAttack() {
-        let x = getRandomInt(this.height);
-        let y = getRandomInt(this.height);
+        const height = this.board.height;
+        let x = getRandomInt(height);
+        let y = getRandomInt(height);
         return [x, y];
     }
 

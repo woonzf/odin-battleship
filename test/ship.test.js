@@ -14,18 +14,14 @@ test('new Ship() OK', () => {
                 });
 })
 
-test('changeAxis() & getAxis() OK', () => {
+test('changeAxis() OK', () => {
     ship.changeAxis();
-    expect(ship.getAxis()).toBe("y");
+    expect(ship.axis).toBe("y");
 })
 
-test('getLength() OK', () => {
-    expect(ship.getLength()).toBe(5);
-})
-
-test('setCoordinates() & getCoordinates() OK', () => {
+test('setCoordinates() OK', () => {
     ship.setCoordinates([[0,0], [0,5]]);
-    expect(ship.getCoordinates()).toEqual([[0,0], [0,5]]);
+    expect(ship.coordinates).toEqual([[0,0], [0,5]]);
 })
 
 test('hit() & isSunk() OK', () => {

@@ -9,14 +9,6 @@ class Board {
         this.mapAttacks = new Map();
     }
 
-    getHeight() {
-        return this.height;
-    }
-
-    getShips() {
-        return this.ships;
-    }
-
     createShips() {
         const carrier = new Ship("Carrier", 5);
         const battleship = new Ship("Battleship", 4);
@@ -42,12 +34,10 @@ class Board {
     }
 
     getCoordinates(ship, map) {
-        const axis = ship.getAxis();
-        const length = ship.getLength();
         let coordinates = null;
 
         while (!this.isValidCoordinates(coordinates, map)) {
-            coordinates = this.generateCoordinates(axis, length);
+            coordinates = this.generateCoordinates(ship.axis, ship.length);
         }
         
         return coordinates;
