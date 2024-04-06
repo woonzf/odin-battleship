@@ -92,11 +92,6 @@ class Board {
         return false;
     }
 
-    isAttacked(x, y) {
-        if (this.mapAttacks.has(`${x}${y}`)) return true;
-        return false;
-    }
-
     receiveAttack(x, y) {
         const key = `${x}${y}`;
         const ship = this.mapShips.get(key);
