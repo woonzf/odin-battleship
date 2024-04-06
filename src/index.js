@@ -1,8 +1,11 @@
 import './style.css';
+import { dom } from './dom/dom.js';
 
 const Player = require('./game-logic/player.js');
 
 const battleship = (() => {
+    dom.init();
+
     let name = null;
     let player1 = null;
     let player2 = null;
@@ -25,20 +28,20 @@ const battleship = (() => {
 
             console.log(`${player1.name}: ${player1.life}, ${player2.name}: ${player2.life}`)
             
-            if (isGame()) break;
-            updateTurn();
+            if (_isGame()) break;
+            _updateTurn();
         }
 
         console.log(`${turn.name} wins!`)
     }
 
-    function isGame() {
+    function _isGame() {
         if (!Boolean(player1.life)) return true;
         if (!Boolean(player2.life)) return true;
         return false;
     }
 
-    function updateTurn() {
+    function _updateTurn() {
         const temp = turn;
         turn = notTurn;
         notTurn = temp;

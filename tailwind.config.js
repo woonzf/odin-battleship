@@ -2,8 +2,9 @@
 module.exports = {
   content: ['./dist/*.html'],
   theme: {
-    extend: {},
+    extend: {
+      prefix: 'tw-',
+    },
   },
   plugins: [],
 }
-
