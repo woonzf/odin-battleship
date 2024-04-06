@@ -6,7 +6,32 @@
     <title>Battleship</title>
     <script src="./bundle.js" defer></script>
 </head>
-<body>
-    <h1 class="text-4xl text-blue-700">My Webpack + Tailwind App</h1>
+<body class="h-screen bg-gradient-to-r from-cyan-400 to-cyan-600 flex flex-col justify-between">
+    <div class="h-[10vh] flex justify-center items-center text-white text-3xl tw-text-shadow-1110">
+        BATTLESHIP
+    </div>
+    <div class="flex flex-col justify-center items-center" id="game">
+        <div class="w-[50vw] flex justify-between items-center" id="tab">
+            <button class="w-[20vw] px-2 flex justify-between items-center border border-white" id="tab-1">
+                <span id="name-1">Player 1</span>
+                <span id="life-1">5</span>
+            </button>
+            <button class="w-[20vw] px-2 flex flex-row-reverse justify-between items-center border border-white" id="tab-2">
+                <span id="name-2">Player 2</span>
+                <span id="life-2">5</span>
+            </button>
+        </div>
+        <div class="w-[50vw] flex" id="board">
+            <div class="w-[50vw] border border-white" id="board-1">Board 1</div>
+            <div class="w-[50vw] border border-white" id="board-2">Board 2</div>
+        </div>
+    </div>
+    <div class="flex justify-center items-center" id="log">Log</div>
+    <div class="h-[10vh] flex justify-center items-center text-white text-2xl">
+        <a class="flex gap-[1vw] w-8 mr-[45px] rounded-2xl tw-box-shadow-1110" href="https://github.com/woonzf" target="_blank" rel="noopener noreferrer">
+            <img class="h-8" id="icon-github" src="" alt="GitHub Logo">
+            <span class="mt-0.5 tw-text-shadow-1110">ZF</span>
+        </a>
+    </div>
 </body>
 </html>
