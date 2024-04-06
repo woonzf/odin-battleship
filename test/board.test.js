@@ -1,5 +1,4 @@
-const Board = require('../src/board.js');
-const Ship = require('../src/ship.js');
+const Board = require('../src/game-logic/board.js');
 
 const board = new Board();
 

@@ -1,6 +1,6 @@
 import './style.css';
 
-const Player = require('./player.js');
+const Player = require('./game-logic/player.js');
 
 const battleship = (() => {
     let name = null;
