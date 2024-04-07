@@ -4,8 +4,6 @@ import { dom } from './dom/dom.js';
 const Player = require('./game-logic/player.js');
 
 const battleship = (() => {
-    dom.init();
-
     let name = null;
     let player1 = null;
     let player2 = null;
@@ -13,12 +11,22 @@ const battleship = (() => {
     let notTurn = null;
 
     function run() {
+        dom.init();
+        _initPlayers();
+        dom.initBoard(player1, player2);
+        dom.addBoardListener();
+        _gameLoop();
+    }
+
+    function _initPlayers() {
         name = "Player 1";
         player1 = new Player(name);
         player2 = new Player("Player 2");
         turn = player1;
         notTurn = player2;
+    }
 
+    function _gameLoop() {
         // Game loop
         while (1) {
             // AI vs AI
