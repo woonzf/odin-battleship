@@ -1,4 +1,4 @@
-const Player = require('../src/game-logic/player.js');
+const Player = require('../src/module-back-end/player.js');
 
 const player = new Player();
 

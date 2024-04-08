@@ -1,4 +1,4 @@
-const Board = require('../src/game-logic/board.js');
+const Board = require('../src/module-back-end/board.js');
 
 const board = new Board();
 

@@ -1,4 +1,4 @@
-const Ship = require('../src/game-logic/ship.js');
+const Ship = require('../src/module-back-end/ship.js');
 
 const ship = new Ship("Carrier", 5);
 ship.axis = "x";
