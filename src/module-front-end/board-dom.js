@@ -1,10 +1,12 @@
 import { game } from "./game";
+import { blocker } from "./blocker";
 
 const boardDOM = (() => {
     const boardShip1 = document.querySelector("#board-ship-1");
     const boardShip2 = document.querySelector("#board-ship-2");
     const boardAttack1 = document.querySelector("#board-attack-1");
     const boardAttack2 = document.querySelector("#board-attack-2");
+    
     const boardShipWrapper1 = document.querySelector("#board-ship-wrapper-1");
     const boardShipWrapper2 = document.querySelector("#board-ship-wrapper-2");
     const boardAttackWrapper1 = document.querySelector("#board-attack-wrapper-1");
@@ -13,9 +15,12 @@ const boardDOM = (() => {
     const boardShipWrappers = [boardShipWrapper1, boardShipWrapper2];
     const boardAttackWrappers = [boardAttackWrapper1, boardAttackWrapper2];
 
-    function initBoard(player1, player2) {
+    function initBoard(mode, player1, player2) {
         _createBoardShip(player1, boardShip1);
-        _createBoardShip(player2, boardShip2);
+
+        if (mode === 1) _createEmptyBoardShip(player2, boardShip2);
+        else _createBoardShip(player2, boardShip2);
+
         _createBoardAttack(player1, boardAttack1, player2.board.mapShips, boardShip2);
         _createBoardAttack(player2, boardAttack2, player1.board.mapShips, boardShip1);
     }
@@ -40,9 +45,19 @@ const boardDOM = (() => {
         const height = player.board.height;
         for (let i = 0; i < Math.pow(height, 2); i++) {
             const box = document.createElement("div");
-            box.classList.add("box", "border-2", "flex", "justify-center", "items-center", "outline-offset-[-4.5px]");
+            box.classList.add("border-2", "flex", "justify-center", "items-center", "outline-offset-[-4.5px]");
             box.id = _assignBoxID(i, height);
             box.textContent = _assignShipText(box, player.board.mapShips);
+            board.append(box);
+        }
+    }
+
+    function _createEmptyBoardShip(player, board) {
+        const height = player.board.height;
+        for (let i = 0; i < Math.pow(height, 2); i++) {
+            const box = document.createElement("div");
+            box.classList.add("border-2", "outline-offset-[-4.5px]");
+            box.id = _assignBoxID(i, height);
             board.append(box);
         }
     }
@@ -51,7 +66,7 @@ const boardDOM = (() => {
         const height = player.board.height;
         for (let i = 0; i < Math.pow(height, 2); i++) {
             const box = document.createElement("div");
-            box.classList.add("box", "border-2", "flex", "justify-center", "items-center", "outline-offset-[-4px]", "hover:outline-dashed", "hover:outline-yellow-500");
+            box.classList.add("border-2", "flex", "justify-center", "items-center", "outline-offset-[-4px]", "hover:outline-dashed", "hover:outline-yellow-500");
             box.id = _assignBoxID(i, height);
             _addBoxListener(box, mapShipEnemy, boardShipEnemy);
             board.append(box);
@@ -67,12 +82,13 @@ const boardDOM = (() => {
     function _assignShipText(box, map) {
         const ship = map.get(box.id);
         if (!ship) return "";
-        box.classList.add("bg-slate-400");
+        box.classList.add("bg-slate-600");
         return ship.name[0]; 
     }
 
     function _addBoxListener(box, mapShipEnemy, boardShipEnemy) {
         box.addEventListener("click", function() {
+            blocker.activateClickBlock();
             box.classList.remove("hover:outline-dashed", "hover:outline-yellow-500");
             
             if (mapShipEnemy.has(box.id)) {

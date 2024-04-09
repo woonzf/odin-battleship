@@ -1,7 +1,8 @@
-import '../style.css';
-import { dom } from './dom.js';
-import { tab } from './tab.js';
-import { boardDOM } from './board-dom.js';
+import { welcome } from './welcome';
+import { dom } from './dom';
+import { tab } from './tab';
+import { boardDOM } from './board-dom';
+import { blocker } from './blocker';
 
 const Player = require('../module-back-end/player.js');
 
@@ -11,8 +12,12 @@ const game = (() => {
     let notTurn = null;
 
     function init() {
-        _initPlayers();
-        dom.init(... players);
+        welcome.init();
+    }
+
+    function createGame(name1, name2, mode) {
+        _initPlayers(name1, name2);
+        dom.init(mode, ... players);
         _AImove();
     }
 
@@ -28,14 +33,15 @@ const game = (() => {
 
         _updateTurn();
         dom.activatePlayer(turn, notTurn);
+        if (players[turn].name !== "AI") blocker.deactivateClickBlock();
 
         _AImove();
     }
 
     // Private functions
-    function _initPlayers() {
-        const player1 = new Player("AI");
-        const player2 = new Player("AI");
+    function _initPlayers(name1, name2) {
+        const player1 = new Player(name1);
+        const player2 = new Player(name2);
         players = [player1, player2];
         turn = 0;
         notTurn = 1;
@@ -64,7 +70,7 @@ const game = (() => {
         notTurn = temp;
     }
 
-    return { init, update };
+    return { init, createGame, update };
 })()
 
 export { game };

@@ -1,13 +1,13 @@
 import iconGitHub from '../icon/github-mark-white.png';
 
-import { tab } from './tab.js';
-import { boardDOM } from './board-dom.js';
+import { tab } from './tab';
+import { boardDOM } from './board-dom';
 
 const dom = (() => {
-    function init(... players) {
+    function init(mode, ... players) {
         _initImg();
         tab.init(... players);
-        boardDOM.initBoard(... players);
+        boardDOM.initBoard(mode, ... players);
     }
 
     function activatePlayer(turn, notTurn) {
