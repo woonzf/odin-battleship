@@ -33,7 +33,7 @@ const game = (() => {
 
         _updateTurn();
         dom.activatePlayer(turn, notTurn);
-        if (players[turn].name !== "AI") blocker.deactivateClickBlock();
+        if (players[turn].name !== "AI") blocker.deactivateBlock("board");
 
         _AImove();
     }

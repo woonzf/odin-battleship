@@ -1,15 +1,22 @@
 const blocker = (() => {
-    const clickBlock = document.querySelector("#click-block");
+    const blockBoard = document.querySelector("#block-board");
+    const blockScreen = document.querySelector("#block-screen");
 
-    function activateClickBlock() {
-        clickBlock.classList.remove("hidden");
+    function activateBlock(string) {
+        let element = null;
+        if (string === "board") element = blockBoard;
+        else if (string === "screen") element = blockScreen;
+        element.classList.remove("hidden");
     }
 
-    function deactivateClickBlock() {
-        clickBlock.classList.add("hidden");
+    function deactivateBlock(string) {
+        let element = null;
+        if (string === "board") element = blockBoard;
+        else if (string === "screen") element = blockScreen;
+        element.classList.add("hidden");
     }
 
-    return { activateClickBlock, deactivateClickBlock };
+    return { activateBlock, deactivateBlock };
 })()
 
 export { blocker };

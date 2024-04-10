@@ -88,7 +88,7 @@ const boardDOM = (() => {
 
     function _addBoxListener(box, mapShipEnemy, boardShipEnemy) {
         box.addEventListener("click", function() {
-            blocker.activateClickBlock();
+            blocker.activateBlock("board");
             box.classList.remove("hover:outline-dashed", "hover:outline-yellow-500");
             
             if (mapShipEnemy.has(box.id)) {
