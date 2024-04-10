@@ -23,12 +23,22 @@ const welcome = (() => {
         _initPVP();
     }
 
+    function show() {
+        screenWelcome.classList.remove("hidden");
+    }
+
+    function rematch(mode) {
+        if (mode === 1) okPVAI.click();
+        else if (mode === 2) okPVP.click();
+    }
+
     // Private functions
     function _initPVAI() {
         buttonPVAI.onclick = () => { dialogPVAI.showModal(); }
         closePVAI.onclick = () => { dialogPVAI.close(); }
         okPVAI.onclick = () => {
             game.createGame(namePVAI1.value || "Player 1", "AI", 1);
+            namePVAI1.value = "";
             screenWelcome.classList.add("hidden");
             screenMain.classList.remove("hidden");
         }
@@ -39,12 +49,14 @@ const welcome = (() => {
         closePVP.onclick = () => { dialogPVP.close(); }
         okPVP.onclick = () => {
             game.createGame(namePVP1.value || "Player 1", namePVP2.value || "Player 2", 2);
+            namePVP1.value = "";
+            namePVP2.value = "";
             screenWelcome.classList.add("hidden");
             screenMain.classList.remove("hidden");
         }
     }
 
-    return { init }
+    return { init, show, rematch }
 })()
 
 export { welcome }

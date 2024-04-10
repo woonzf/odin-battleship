@@ -1,4 +1,4 @@
 import './style.css';
-import { game } from './module-front-end/game';
+import { welcome } from './module-front-end/welcome';
 
-game.init();
+welcome.init();

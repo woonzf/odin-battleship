@@ -1,4 +1,3 @@
-import { welcome } from './welcome';
 import { dom } from './dom';
 import { tab } from './tab';
 import { boardDOM } from './board-dom';
@@ -11,10 +10,6 @@ const game = (() => {
     let turn = null;
     let notTurn = null;
 
-    function init() {
-        welcome.init();
-    }
-
     function createGame(name1, name2, mode) {
         _initPlayers(name1, name2);
         dom.init(mode, ... players);
@@ -25,17 +20,18 @@ const game = (() => {
         const xy = id.split("");
         players[notTurn].receiveAttack([+xy[0], +xy[1]]);
         tab.updateLife(players[notTurn], notTurn);
-
-        if (_isGame()) {
-            alert(`${players[turn].name} wins!`);
-            return;
-        };
-
-        _updateTurn();
-        dom.activatePlayer(turn, notTurn);
-        if (players[turn].name !== "AI") blocker.deactivateBlock("board");
-
-        _AImove();
+        setTimeout(() => {
+            if (_isGame()) {
+                alert(`${players[turn].name} wins!`);
+                return;
+            };
+    
+            _updateTurn();
+            dom.activatePlayer(turn, notTurn);
+            if (players[turn].name !== "AI") blocker.deactivateBlock("board");
+    
+            _AImove();
+        }, 1000)
     }
 
     // Private functions
@@ -70,7 +66,7 @@ const game = (() => {
         notTurn = temp;
     }
 
-    return { init, createGame, update };
+    return { createGame, update };
 })()
 
 export { game };

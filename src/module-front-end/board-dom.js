@@ -40,6 +40,13 @@ const boardDOM = (() => {
         _getBox(`${x}${y}`, board).click();
     }
 
+    function reset() {
+        const boards = [boardShip1, boardShip2, boardAttack1, boardAttack2];
+        boards.forEach(board => {
+            while (board.children.length > 0) board.removeChild(board.lastChild);
+        })
+    }
+
     // Private functions
     function _createBoardShip(player, board) {
         const height = player.board.height;
@@ -99,9 +106,7 @@ const boardDOM = (() => {
                 _placeMissMark(_getBox(box.id, boardShipEnemy), 0);
             }
 
-            setTimeout(() => {
-                game.update(box.id);
-            }, 1000);
+            game.update(box.id);
         }, {once: true})
     }
 
@@ -125,7 +130,7 @@ const boardDOM = (() => {
         }
     }
 
-    return { initBoard, activate, deactivate, simulateAIClick };
+    return { initBoard, activate, deactivate, simulateAIClick, reset };
 })()
 
 export { boardDOM }

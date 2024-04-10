@@ -16,7 +16,12 @@ const blocker = (() => {
         element.classList.add("hidden");
     }
 
-    return { activateBlock, deactivateBlock };
+    function reset() {
+        blockBoard.classList.add("hidden");
+        blockScreen.classList.add("hidden");
+    }
+
+    return { activateBlock, deactivateBlock, reset };
 })()
 
 export { blocker };
