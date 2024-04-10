@@ -1,5 +1,6 @@
 import { game } from "./game";
 import { blocker } from "./blocker";
+import { log } from "./log";
 
 const boardDOM = (() => {
     const boardShip1 = document.querySelector("#board-ship-1");
@@ -75,7 +76,7 @@ const boardDOM = (() => {
             const box = document.createElement("div");
             box.classList.add("border-2", "flex", "justify-center", "items-center", "outline-offset-[-4px]", "hover:outline-dashed", "hover:outline-yellow-500");
             box.id = _assignBoxID(i, height);
-            _addBoxListener(box, mapShipEnemy, boardShipEnemy);
+            _addBoxListener(box, player, mapShipEnemy, boardShipEnemy);
             board.append(box);
         }
     }
@@ -93,20 +94,29 @@ const boardDOM = (() => {
         return ship.name[0]; 
     }
 
-    function _addBoxListener(box, mapShipEnemy, boardShipEnemy) {
+    function _addBoxListener(box, player, mapShipEnemy, boardShipEnemy) {
+        const xy = box.id.split("");
         box.addEventListener("click", function() {
             blocker.activateBlock("board");
+            log.message(`${player.name} => [ ${xy[0]} , ${xy[1]} ]`);
             box.classList.remove("hover:outline-dashed", "hover:outline-yellow-500");
+            box.classList.add("outline-dashed", "outline-yellow-500");
             
-            if (mapShipEnemy.has(box.id)) {
-                _placeHitMark(box, 1);
-                _placeHitMark(_getBox(box.id, boardShipEnemy), 0);
-            } else {
-                _placeMissMark(box, 1);
-                _placeMissMark(_getBox(box.id, boardShipEnemy), 0);
-            }
+            setTimeout(() => {
+                if (mapShipEnemy.has(box.id)) {
+                    box.classList.remove("outline-dashed", "outline-yellow-500");
+                    _placeHitMark(box, 1);
+                    _placeHitMark(_getBox(box.id, boardShipEnemy), 0);
+                    log.message("Hit!");
+                } else {
+                    box.classList.remove("outline-dashed", "outline-yellow-500");
+                    _placeMissMark(box, 1);
+                    _placeMissMark(_getBox(box.id, boardShipEnemy), 0);
+                    log.message("Miss...");
+                }
 
-            game.update(box.id);
+                game.update(box.id);
+            }, 500)
         }, {once: true})
     }
 

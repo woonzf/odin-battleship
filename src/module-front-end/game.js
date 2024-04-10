@@ -2,6 +2,7 @@ import { dom } from './dom';
 import { tab } from './tab';
 import { boardDOM } from './board-dom';
 import { blocker } from './blocker';
+import { log } from './log.js';
 
 const Player = require('../module-back-end/player.js');
 
@@ -19,10 +20,13 @@ const game = (() => {
     function update(id) {
         const xy = id.split("");
         players[notTurn].receiveAttack([+xy[0], +xy[1]]);
+        players[notTurn].life = 0; // test
         tab.updateLife(players[notTurn], notTurn);
+
         setTimeout(() => {
             if (_isGame()) {
-                alert(`${players[turn].name} wins!`);
+                log.message(`${players[turn].name} wins!`);
+                dom.endGame(players[turn].name);
                 return;
             };
     

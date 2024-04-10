@@ -1,4 +1,5 @@
 import { game } from "./game";
+import { log } from "./log";
 
 const welcome = (() => {
     const screenWelcome = document.querySelector("#welcome");
@@ -39,6 +40,7 @@ const welcome = (() => {
         okPVAI.onclick = () => {
             game.createGame(namePVAI1.value || "Player 1", "AI", 1);
             namePVAI1.value = "";
+            log.message("Game mode: Player vs AI");
             screenWelcome.classList.add("hidden");
             screenMain.classList.remove("hidden");
         }
@@ -51,6 +53,7 @@ const welcome = (() => {
             game.createGame(namePVP1.value || "Player 1", namePVP2.value || "Player 2", 2);
             namePVP1.value = "";
             namePVP2.value = "";
+            log.message("Game mode: Player vs Player");
             screenWelcome.classList.add("hidden");
             screenMain.classList.remove("hidden");
         }

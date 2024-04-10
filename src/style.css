@@ -14,10 +14,6 @@
     }
 }
 
-.tw-box-shadow-1110 {
-    box-shadow: 1px 1px 10px hsl(0, 0%, 30%);
-}
-
 .tw-text-shadow-1110 {
     text-shadow: 1px 1px 10px black;
 }

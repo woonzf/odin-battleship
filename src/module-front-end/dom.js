@@ -4,10 +4,12 @@ import { tab } from './tab';
 import { boardDOM } from './board-dom';
 import { blocker } from './blocker';
 import { welcome } from './welcome';
+import { log } from './log';
 
 const dom = (() => {
     const test = document.querySelector("#test");
     const end = document.querySelector("#main-end");
+    const winner = document.querySelector("#winner");
     const rematch = document.querySelector("#button-rematch");
     const mainMenu = document.querySelector("#button-main-menu");
 
@@ -21,8 +23,7 @@ const dom = (() => {
 
         // Test
         test.onclick = () => {
-            blocker.activateBlock("screen");
-            end.classList.remove("hidden");
+            endGame();
         }
 
         rematch.onclick = () => {
@@ -39,6 +40,13 @@ const dom = (() => {
     function activatePlayer(turn, notTurn) {
         _deactivate(notTurn);
         _activate(turn);
+    }
+
+    function endGame(name) {
+        blocker.deactivateBlock("board");
+        blocker.activateBlock("screen");
+        winner.textContent = `${name} wins!`;
+        end.classList.remove("hidden");
     }
 
     // Private functions
@@ -59,11 +67,12 @@ const dom = (() => {
 
     function _reset() {
         boardDOM.reset();
+        log.reset();
         blocker.reset();
         end.classList.add("hidden");
     }
 
-    return { init, activatePlayer };
+    return { init, activatePlayer, endGame };
 })()
 
 export { dom };
