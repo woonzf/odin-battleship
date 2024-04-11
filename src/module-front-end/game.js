@@ -20,7 +20,7 @@ const game = (() => {
     function update(id) {
         const xy = id.split("");
         players[notTurn].receiveAttack([+xy[0], +xy[1]]);
-        players[notTurn].life = 0; // test
+        // players[notTurn].life = 0; // test
         tab.updateLife(players[notTurn], notTurn);
 
         setTimeout(() => {
