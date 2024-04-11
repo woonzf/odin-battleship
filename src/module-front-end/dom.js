@@ -7,7 +7,6 @@ import { welcome } from './welcome';
 import { log } from './log';
 
 const dom = (() => {
-    const test = document.querySelector("#test");
     const end = document.querySelector("#main-end");
     const winner = document.querySelector("#winner");
     const rematch = document.querySelector("#button-rematch");
@@ -21,11 +20,6 @@ const dom = (() => {
         tab.init(... players);
         boardDOM.initBoard(mode, ... players);
 
-        // Test
-        test.onclick = () => {
-            endGame();
-        }
-
         rematch.onclick = () => {
             _reset();
             welcome.rematch(mode);
@@ -33,7 +27,8 @@ const dom = (() => {
 
         mainMenu.onclick = () => {
             _reset();
-            welcome.show();
+            welcome.hide("main");
+            welcome.show("welcome");
         }
     }
 

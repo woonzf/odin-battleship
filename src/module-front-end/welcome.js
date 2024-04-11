@@ -18,14 +18,27 @@ const welcome = (() => {
     const namePVP2 = document.querySelector("#name-pvp-1");
     const okPVP = document.querySelector("#ok-pvp");
     const closePVP = document.querySelector("#close-pvp");
+
+    const mode1 = document.querySelector("#mode-1");
+    const mode2 = document.querySelector("#mode-2");
     
     function init() {
         _initPVAI();
         _initPVP();
     }
 
-    function show() {
-        screenWelcome.classList.remove("hidden");
+    function show(string) {
+        let screen = null;
+        if (string === "welcome") screen = screenWelcome;
+        else if (string === "main") screen = screenMain;
+        screen.classList.remove("hidden");
+    }
+
+    function hide(string) {
+        let screen = null;
+        if (string === "welcome") screen = screenWelcome;
+        else if (string === "main") screen = screenMain;
+        screen.classList.add("hidden");
     }
 
     function rematch(mode) {
@@ -40,7 +53,8 @@ const welcome = (() => {
         okPVAI.onclick = () => {
             game.createGame(namePVAI1.value || "Player 1", "AI", 1);
             namePVAI1.value = "";
-            log.message("Game mode: Player vs AI");
+            mode1.textContent = "Player";
+            mode2.textContent = "AI";
             screenWelcome.classList.add("hidden");
             screenMain.classList.remove("hidden");
         }
@@ -53,13 +67,14 @@ const welcome = (() => {
             game.createGame(namePVP1.value || "Player 1", namePVP2.value || "Player 2", 2);
             namePVP1.value = "";
             namePVP2.value = "";
-            log.message("Game mode: Player vs Player");
+            mode1.textContent = "Player";
+            mode2.textContent = "Player";
             screenWelcome.classList.add("hidden");
             screenMain.classList.remove("hidden");
         }
     }
 
-    return { init, show, rematch }
+    return { init, show, hide, rematch }
 })()
 
 export { welcome }
