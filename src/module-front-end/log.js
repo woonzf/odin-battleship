@@ -1,15 +1,18 @@
 const log = (() => {
-    const logDiv = document.querySelector("#log");
+    const logDiv1 = document.querySelector("#log-1");
+    const logDiv2 = document.querySelector("#log-2");
 
-    function message(string) {
-        const span = document.createElement("span");
-        span.textContent = string;
-        logDiv.append(span);
-        logDiv.scrollTop = logDiv.scrollHeight;
+    function message(string, n) {
+        if (n === 1) {
+            reset();
+            logDiv1.textContent = string;
+        }
+        else if (n === 2) logDiv2.textContent = string;
     }
 
     function reset() {
-        while (logDiv.children.length > 0) logDiv.removeChild(logDiv.lastChild);
+        logDiv1.textContent = "...";
+        logDiv2.textContent = "...";
     }
 
     return { message, reset };

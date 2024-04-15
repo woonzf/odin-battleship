@@ -25,7 +25,7 @@ const game = (() => {
 
         setTimeout(() => {
             if (_isGame()) {
-                log.message(`${players[turn].name} wins!`);
+                log.message(`${players[turn].name} wins!`, 1);
                 dom.endGame(players[turn].name);
                 return;
             };

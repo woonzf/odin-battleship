@@ -98,7 +98,7 @@ const boardDOM = (() => {
         const xy = box.id.split("");
         box.addEventListener("click", function() {
             blocker.activateBlock("board");
-            log.message(`-- ${player.name} >>> [ ${xy[0]} , ${xy[1]} ]`);
+            log.message(`${player.name} launches a missile to [ ${xy[0]} , ${xy[1]} ]`, 1);
 
             box.classList.remove("hover:outline-dashed", "hover:outline-yellow-500");
             box.classList.add("outline-dashed", "outline-yellow-500");
@@ -110,16 +110,16 @@ const boardDOM = (() => {
                     box.classList.remove("outline-dashed", "outline-yellow-500");
                     _placeHitMark(box, 1);
                     _placeHitMark(_getBox(box.id, boardShipEnemy), 0);
-                    log.message(">> Hit!");
+                    log.message("!!! HIT !!!", 2);
 
                     if (ship.hp === 1) {
-                        log.message(`// ${player.name} sunk a ${ship.name}!`);
+                        log.message(`${player.name} sunk a ${ship.name}!`, 1);
                     }
                 } else {
                     box.classList.remove("outline-dashed", "outline-yellow-500");
                     _placeMissMark(box, 1);
                     _placeMissMark(_getBox(box.id, boardShipEnemy), 0);
-                    log.message(">> Miss...");
+                    log.message("... MISS ...", 2);
                 }
 
                 game.update(box.id);
