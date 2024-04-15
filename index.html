@@ -34,7 +34,45 @@
             <button class="absolute top-2 right-3" id="close-pvp">X</button>
         </dialog>
     </div>
-    <div class="w-screen bg-gradient-to-r from-slate-500 to-slate-600 flex flex-col justify-between items-center lg:h-screen hidden" id="main">
+    <div class="min-h-screen w-screen bg-gradient-to-r from-slate-500 to-slate-600 flex flex-col justify-between items-center lg:h-screen hidden" id="main">
+        <div class="h-[10vh] flex justify-center items-center text-slate-200 text-3xl tw-text-shadow-1110">BATTLESHIP</div>
+        <div class="h-[10vh] flex flex-col justify-center items-center text-slate-200 text-center">
+            <div class="text-balance" id="log-1">Welcome!</div>
+            <div class="text-lg font-bold" id="log-2">...</div>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-[5vh] lg:flex-row lg:gap-[5vw]">
+            <div class="flex flex-col justify-center items-center order-0 lg:order-1">
+                <div class="h-[10vw] w-full flex justify-between items-center lg:h-[5vh] lg:w-[50vh]">
+                    <div class="h-full w-[40%] px-[5%] pt-[4%] flex justify-between items-center text-md bg-slate-200 rounded-t-lg lg:text-lg" id="tab-1">
+                        <span class="max-w-[80%] overflow-hidden text-ellipsis" id="name-1"></span>
+                        <span id="life-1"></span>
+                    </div>
+                    <div class="h-full w-[40%] px-[5%] pt-[4%] flex justify-between items-center text-md bg-slate-400 rounded-t-lg lg:text-lg flex-row-reverse mb-2" id="tab-2">
+                        <span class="max-w-[80%] overflow-hidden text-ellipsis" id="name-2"></span>
+                        <span id="life-2"></span>
+                    </div>
+                </div>
+                <div class="w-full lg:w-[50vh]">
+                    <div class="h-[80vw] w-[80vw] bg-transparent absolute lg:h-[50vh] lg:w-[50vh] hidden" id="block-board"></div>
+                    <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tr-lg lg:p-[2vh]" id="board-attack-wrapper-1">
+                        <div class="bg-slate-400 text-slate-200">
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-attack-1"></div>
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh] hidden" id="board-ship-1"></div>
+                        </div>
+                    </div>
+                    <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tl-lg lg:p-[2vh] hidden" id="board-attack-wrapper-2">
+                        <div class="bg-slate-400 text-slate-200">
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-attack-2"></div>
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh] hidden" id="board-ship-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="h-10 w-[80vw] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 lg:w-[50vh]"id="view-1">VIEW OWN ( HOLD )</button>
+            <button class="h-10 w-[80vw] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 lg:w-[50vh] hidden" id="view-2">VIEW OWN ( HOLD )</button>
+        </div>
         <div class="h-full w-full absolute hidden" id="block-screen"></div>
         <div class="h-[15vh] w-full bg-slate-200 flex flex-col justify-evenly items-center fixed top-1/2 translate-y-[-50%] shadow-1110 hidden" id="main-end">
             <span class="text-xl" id="winner"></span>
@@ -43,54 +81,8 @@
                 <button class="h-10 w-[150px] bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500" id="button-main-menu">Main Menu</button>
             </div>
         </div>
-        <div class="h-[10vh] flex justify-center items-center text-slate-200 text-3xl tw-text-shadow-1110">BATTLESHIP</div>
-        <div>
-            <div class="h-[10vh] flex flex-col justify-center items-center text-slate-200">
-                <div class="text-lg" id="log-1">...</div>
-                <div class="text-xl" id="log-2">...</div>
-            </div>
-            <div class="w-[80vw] flex flex-col justify-center items-center gap-[5vh] lg:flex-row lg:gap-[5vw]">
-                <div class="w-[60vw] flex justify-center items-center order-1 lg:order-0 lg:w-[30vh]">
-                    <div class="p-[1vw] bg-slate-200 rounded-md lg:p-[1vh]" id="board-ship-wrapper-1">
-                        <div class="bg-slate-400">
-                            <div class="h-[58vw] w-[58vw] grid grid-cols-10 grid-rows-10 text-slate-200 lg:h-[28vh] lg:w-[28vh]" id="board-ship-1"></div>
-                        </div>
-                    </div>
-                    <div class="p-[1vw] bg-slate-200 rounded-md lg:p-[1vh] hidden" id="board-ship-wrapper-2">
-                        <div class="bg-slate-400">
-                            <div class="h-[58vw] w-[58vw] grid grid-cols-10 grid-rows-10 text-slate-200 lg:h-[28vh] lg:w-[28vh]" id="board-ship-2"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col justify-center items-center order-0 lg:order-1">
-                    <div class="h-[10vw] w-full flex justify-between items-center lg:h-[5vh] lg:w-[50vh]">
-                        <div class="h-full w-[40%] px-[5%] pt-[4%] flex justify-between items-center text-md bg-slate-200 rounded-t-lg lg:text-lg" id="tab-1">
-                            <span class="max-w-[80%] overflow-hidden text-ellipsis" id="name-1"></span>
-                            <span id="life-1"></span>
-                        </div>
-                        <div class="h-full w-[40%] px-[5%] pt-[4%] flex justify-between items-center text-md bg-slate-400 rounded-t-lg lg:text-lg flex-row-reverse mb-2" id="tab-2">
-                            <span class="max-w-[80%] overflow-hidden text-ellipsis" id="name-2"></span>
-                            <span id="life-2"></span>
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-[50vh]">
-                        <div class="h-[80vw] w-[80vw] bg-transparent absolute lg:h-[50vh] lg:w-[50vh] hidden" id="block-board"></div>
-                        <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tr-lg lg:p-[2vh]" id="board-attack-wrapper-1">
-                            <div class="bg-slate-400">
-                                <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-attack-1"></div>
-                            </div>
-                        </div>
-                        <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tl-lg lg:p-[2vh] hidden" id="board-attack-wrapper-2">
-                            <div class="bg-slate-400">
-                                <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-attack-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="h-[10vh] flex justify-center items-center text-slate-200 text-2xl">
-            <a class="w-8 mr-[45px] rounded-2xl flex gap-[1vw] shadow-1110" href="https://github.com/woonzf" target="_blank" rel="noopener noreferrer">
+            <a class="w-8 mr-12 rounded-2xl flex gap-[10px] shadow-1110" href="https://github.com/woonzf" target="_blank" rel="noopener noreferrer">
                 <img class="h-8" id="icon-github" src="" alt="GitHub Logo">
                 <span class="mt-0.5 tw-text-shadow-1110">ZF</span>
             </a>
