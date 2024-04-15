@@ -7,13 +7,11 @@ const boardDOM = (() => {
     const boardShip2 = document.querySelector("#board-ship-2");
     const boardAttack1 = document.querySelector("#board-attack-1");
     const boardAttack2 = document.querySelector("#board-attack-2");
-    
-    const boardShipWrapper1 = document.querySelector("#board-ship-wrapper-1");
-    const boardShipWrapper2 = document.querySelector("#board-ship-wrapper-2");
     const boardAttackWrapper1 = document.querySelector("#board-attack-wrapper-1");
     const boardAttackWrapper2 = document.querySelector("#board-attack-wrapper-2");
 
-    const boardShipWrappers = [boardShipWrapper1, boardShipWrapper2];
+    const boardShips = [boardShip1, boardShip2];
+    const boardAttacks = [boardAttack1, boardAttack2];
     const boardAttackWrappers = [boardAttackWrapper1, boardAttackWrapper2];
 
     function initBoard(mode, player1, player2) {
@@ -27,13 +25,21 @@ const boardDOM = (() => {
     }
 
     function activate(turn) {
-        boardShipWrappers[turn].classList.remove("hidden");
         boardAttackWrappers[turn].classList.remove("hidden");
     }
 
     function deactivate(notTurn) {
-        boardShipWrappers[notTurn].classList.add("hidden");
         boardAttackWrappers[notTurn].classList.add("hidden");
+    }
+
+    function viewShip(n) {
+        boardShips[n].classList.remove("hidden");
+        boardAttacks[n].classList.add("hidden");
+    }
+
+    function viewAttack(n) {
+        boardShips[n].classList.add("hidden");
+        boardAttacks[n].classList.remove("hidden");
     }
 
     function simulateAIClick([x, y], turn) {
@@ -110,7 +116,7 @@ const boardDOM = (() => {
                     box.classList.remove("outline-dashed", "outline-yellow-500");
                     _placeHitMark(box, 1);
                     _placeHitMark(_getBox(box.id, boardShipEnemy), 0);
-                    log.message("!!! HIT !!!", 2);
+                    log.message("H I T", 2);
 
                     if (ship.hp === 1) {
                         log.message(`${player.name} sunk a ${ship.name}!`, 1);
@@ -119,7 +125,7 @@ const boardDOM = (() => {
                     box.classList.remove("outline-dashed", "outline-yellow-500");
                     _placeMissMark(box, 1);
                     _placeMissMark(_getBox(box.id, boardShipEnemy), 0);
-                    log.message("... MISS ...", 2);
+                    log.message("M I S S", 2);
                 }
 
                 game.update(box.id);
@@ -147,7 +153,7 @@ const boardDOM = (() => {
         }
     }
 
-    return { initBoard, activate, deactivate, simulateAIClick, reset };
+    return { initBoard, activate, deactivate, viewShip, viewAttack, simulateAIClick, reset };
 })()
 
 export { boardDOM }

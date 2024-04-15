@@ -11,7 +11,10 @@ const dom = (() => {
     const winner = document.querySelector("#winner");
     const rematch = document.querySelector("#button-rematch");
     const mainMenu = document.querySelector("#button-main-menu");
+    const view1 = document.querySelector("#view-1");
+    const view2 = document.querySelector("#view-2");
 
+    const views = [view1, view2];
     let mode = null;
 
     function init(n, ... players) {
@@ -29,6 +32,22 @@ const dom = (() => {
             _reset();
             welcome.hide("main");
             welcome.show("welcome");
+        }
+
+        view1.onmousedown = () => {
+            boardDOM.viewShip(0);
+        }
+
+        view1.onmouseup = () => {
+            boardDOM.viewAttack(0);
+        }
+
+        view2.onmousedown = () => {
+            boardDOM.viewShip(1);
+        }
+
+        view2.onmouseup = () => {
+            boardDOM.viewAttack(1);
         }
     }
 
@@ -53,11 +72,13 @@ const dom = (() => {
     function _activate(turn) {
         tab.activate(turn);
         boardDOM.activate(turn);
+        views[turn].classList.remove("hidden");
     }
 
     function _deactivate(notTurn) {
         tab.deactivate(notTurn);
         boardDOM.deactivate(notTurn);
+        views[notTurn].classList.add("hidden");
     }
 
     function _reset() {
