@@ -34,20 +34,18 @@ const dom = (() => {
             welcome.show("welcome");
         }
 
-        view1.onmousedown = () => {
-            boardDOM.viewShip(0);
-        }
+        view1.onpointerdown = () => { boardDOM.viewShip(0); }
+        view1.onpointerup = () => { boardDOM.viewAttack(0); }
 
-        view1.onmouseup = () => {
-            boardDOM.viewAttack(0);
+        if (mode === 1) {
+            view2.disabled = true;
+            view2.removeEventListener("onpointerdown", boardDOM.viewShip);
+            view2.removeEventListener("onpointerup", boardDOM.viewAttack);
         }
-
-        view2.onmousedown = () => {
-            boardDOM.viewShip(1);
-        }
-
-        view2.onmouseup = () => {
-            boardDOM.viewAttack(1);
+        else if (mode === 2) {
+            view2.disabled = false;
+            view2.onpointerdown = () => { boardDOM.viewShip(1); }
+            view2.onpointerup = () => { boardDOM.viewAttack(1); }
         }
     }
 

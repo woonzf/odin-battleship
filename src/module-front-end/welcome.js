@@ -14,12 +14,9 @@ const welcome = (() => {
 
     const dialogPVP = document.querySelector("#dialog-pvp");
     const namePVP1 = document.querySelector("#name-pvp-1");
-    const namePVP2 = document.querySelector("#name-pvp-1");
+    const namePVP2 = document.querySelector("#name-pvp-2");
     const okPVP = document.querySelector("#ok-pvp");
     const closePVP = document.querySelector("#close-pvp");
-
-    const mode1 = document.querySelector("#mode-1");
-    const mode2 = document.querySelector("#mode-2");
     
     function init() {
         _initPVAI();

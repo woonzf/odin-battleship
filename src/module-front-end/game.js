@@ -2,9 +2,10 @@ import { dom } from './dom';
 import { tab } from './tab';
 import { boardDOM } from './board-dom';
 import { blocker } from './blocker';
-import { log } from './log.js';
+import { log } from './log';
 
 const Player = require('../module-back-end/player.js');
+const getRandomInt = require('../module-back-end/helper.js');
 
 const game = (() => {
     let players = null;
@@ -14,6 +15,7 @@ const game = (() => {
     function createGame(name1, name2, mode) {
         _initPlayers(name1, name2);
         dom.init(mode, ... players);
+        dom.activatePlayer(turn, notTurn);
         _AImove();
     }
 
@@ -43,8 +45,8 @@ const game = (() => {
         const player1 = new Player(name1);
         const player2 = new Player(name2);
         players = [player1, player2];
-        turn = 0;
-        notTurn = 1;
+        turn = getRandomInt(2);
+        notTurn = +!turn;
     }
     
     function _AImove() {
