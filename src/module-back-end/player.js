@@ -9,6 +9,12 @@ class Player {
         this.life = this.ships.length;
     }
 
+    generateBoard() {
+        this.board = new Board();
+        this.ships = this.board.ships;
+        this.life = this.ships.length;
+    }
+
     updateLife() {
         let life = 0;
         this.ships.forEach(ship => {

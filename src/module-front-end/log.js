@@ -11,7 +11,7 @@ const log = (() => {
     }
 
     function reset() {
-        logDiv1.textContent = "...";
+        logDiv1.textContent = "Please choose your preferred formation";
         logDiv2.textContent = "...";
     }
 

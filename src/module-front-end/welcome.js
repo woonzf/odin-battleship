@@ -49,8 +49,7 @@ const welcome = (() => {
         okPVAI.onclick = () => {
             game.createGame(namePVAI1.value || "Player 1", "AI", 1);
             namePVAI1.value = "";
-            screenWelcome.classList.add("hidden");
-            screenMain.classList.remove("hidden");
+            _hideWelcome();
         }
     }
 
@@ -61,9 +60,13 @@ const welcome = (() => {
             game.createGame(namePVP1.value || "Player 1", namePVP2.value || "Player 2", 2);
             namePVP1.value = "";
             namePVP2.value = "";
-            screenWelcome.classList.add("hidden");
-            screenMain.classList.remove("hidden");
+            _hideWelcome();
         }
+    }
+
+    function _hideWelcome() {
+        screenWelcome.classList.add("hidden");
+        screenMain.classList.remove("hidden");
     }
 
     return { init, show, hide, rematch }

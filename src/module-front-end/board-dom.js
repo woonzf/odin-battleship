@@ -7,29 +7,51 @@ const boardDOM = (() => {
     const boardShip2 = document.querySelector("#board-ship-2");
     const boardAttack1 = document.querySelector("#board-attack-1");
     const boardAttack2 = document.querySelector("#board-attack-2");
-    const boardAttackWrapper1 = document.querySelector("#board-attack-wrapper-1");
-    const boardAttackWrapper2 = document.querySelector("#board-attack-wrapper-2");
+    const boardWrapper1 = document.querySelector("#board-wrapper-1");
+    const boardWrapper2 = document.querySelector("#board-wrapper-2");
 
     const boardShips = [boardShip1, boardShip2];
     const boardAttacks = [boardAttack1, boardAttack2];
-    const boardAttackWrappers = [boardAttackWrapper1, boardAttackWrapper2];
+    const boardWrappers = [boardWrapper1, boardWrapper2];
 
-    function initBoard(mode, player1, player2) {
+    function initBoardPre(player1, player2) {
         _createBoardShip(player1, boardShip1);
+        _createBoardShip(player2, boardShip2);
+    }
 
-        if (mode === 1) _createEmptyBoardShip(player2, boardShip2);
-        else _createBoardShip(player2, boardShip2);
+    function getNewBoard(player, n) {
+        player.generateBoard();
+        if (n === 1) {
+            _resetBoard(boardShip1);
+            _createBoardShip(player, boardShip1);
+        }
+        else if (n === 2) {
+            _resetBoard(boardShip2);
+            _createBoardShip(player, boardShip2);
+        }
+    }
 
+    function initBoard(player1, player2) {
         _createBoardAttack(player1, boardAttack1, player2.board.mapShips, boardShip2);
         _createBoardAttack(player2, boardAttack2, player1.board.mapShips, boardShip1);
     }
 
+    function activatePre() {
+        boardShips.forEach(board => {
+            board.classList.add("hidden");
+        })
+
+        boardAttacks.forEach(board => {
+            board.classList.remove("hidden");
+        })
+    }
+
     function activate(turn) {
-        boardAttackWrappers[turn].classList.remove("hidden");
+        boardWrappers[turn].classList.remove("hidden");
     }
 
     function deactivate(notTurn) {
-        boardAttackWrappers[notTurn].classList.add("hidden");
+        boardWrappers[notTurn].classList.add("hidden");
     }
 
     function viewShip(n) {
@@ -48,9 +70,17 @@ const boardDOM = (() => {
     }
 
     function reset() {
-        const boards = [boardShip1, boardShip2, boardAttack1, boardAttack2];
+        const boards = [... boardShips, ... boardAttacks];
         boards.forEach(board => {
-            while (board.children.length > 0) board.removeChild(board.lastChild);
+            _resetBoard(board);
+        })
+
+        boardAttacks.forEach(board => {
+            board.classList.add("hidden");
+        })
+
+        boardShips.forEach(board => {
+            board.classList.remove("hidden");
         })
     }
 
@@ -62,16 +92,6 @@ const boardDOM = (() => {
             box.classList.add("border-2", "flex", "justify-center", "items-center", "outline-offset-[-4.5px]");
             box.id = _assignBoxID(i, height);
             box.textContent = _assignShipText(box, player.board.mapShips);
-            board.append(box);
-        }
-    }
-
-    function _createEmptyBoardShip(player, board) {
-        const height = player.board.height;
-        for (let i = 0; i < Math.pow(height, 2); i++) {
-            const box = document.createElement("div");
-            box.classList.add("border-2", "outline-offset-[-4.5px]");
-            box.id = _assignBoxID(i, height);
             board.append(box);
         }
     }
@@ -118,9 +138,7 @@ const boardDOM = (() => {
                     _placeHitMark(_getBox(box.id, boardShipEnemy), 0);
                     log.message("H I T", 2);
 
-                    if (ship.hp === 1) {
-                        log.message(`${player.name} sunk a ${ship.name}!`, 1);
-                    }
+                    if (ship.hp === 1) log.message(`${player.name} sunk a ${ship.name}!`, 1);
                 } else {
                     box.classList.remove("outline-dashed", "outline-yellow-500");
                     _placeMissMark(box, 1);
@@ -153,7 +171,11 @@ const boardDOM = (() => {
         }
     }
 
-    return { initBoard, activate, deactivate, viewShip, viewAttack, simulateAIClick, reset };
+    function _resetBoard(board) {
+        while (board.children.length > 0) board.removeChild(board.lastChild);
+    }
+
+    return { initBoardPre, getNewBoard, initBoard, activatePre, activate, deactivate, viewShip, viewAttack, simulateAIClick, reset };
 })()
 
 export { boardDOM }

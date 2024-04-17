@@ -37,8 +37,8 @@
     <div class="min-h-screen w-screen bg-gradient-to-r from-slate-500 to-slate-600 flex flex-col justify-between items-center lg:h-screen hidden" id="main">
         <div class="h-[10vh] flex justify-center items-center text-slate-200 text-3xl tw-text-shadow-1110">BATTLESHIP</div>
         <div class="h-[10vh] flex flex-col justify-center items-center text-slate-200 text-center">
-            <div class="text-balance" id="log-1">...</div>
-            <div class="text-lg font-bold" id="log-2">...</div>
+            <div class="text-balance" id="log-1"></div>
+            <div class="text-lg font-bold" id="log-2"></div>
         </div>
         <div class="flex flex-col justify-center items-center gap-[5vh] lg:flex-row lg:gap-[5vw]">
             <div class="flex flex-col justify-center items-center order-0 lg:order-1">
@@ -53,32 +53,48 @@
                     </div>
                 </div>
                 <div class="w-full lg:w-[50vh]">
-                    <div class="h-[80vw] w-[80vw] bg-transparent absolute lg:h-[50vh] lg:w-[50vh] hidden" id="block-board"></div>
-                    <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tr-lg lg:p-[2vh]" id="board-attack-wrapper-1">
+                    <div class="h-[80vw] w-[80vw] bg-transparent absolute lg:h-[50vh] lg:w-[50vh]" id="block-board"></div>
+                    <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tr-lg lg:p-[2vh]" id="board-wrapper-1">
                         <div class="bg-slate-400 text-slate-200">
-                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-attack-1"></div>
-                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh] hidden" id="board-ship-1"></div>
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-ship-1"></div>
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh] hidden" id="board-attack-1"></div>
                         </div>
                     </div>
-                    <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tl-lg lg:p-[2vh] hidden" id="board-attack-wrapper-2">
+                    <div class="p-[2vw] bg-slate-200 rounded-b-lg rounded-tl-lg lg:p-[2vh] hidden" id="board-wrapper-2">
                         <div class="bg-slate-400 text-slate-200">
-                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-attack-2"></div>
-                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh] hidden" id="board-ship-2"></div>
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh]" id="board-ship-2"></div>
+                            <div class="h-[76vw] w-[76vw] grid grid-cols-10 grid-rows-10 lg:h-[46vh] lg:w-[46vh] hidden" id="board-attack-2"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div>
-            <button class="h-10 w-[80vw] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 lg:w-[50vh]"id="view-1">VIEW OWN ( HOLD )</button>
-            <button class="h-10 w-[80vw] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 lg:w-[50vh] disabled:bg-transparent disabled:text-transparent hidden" id="view-2">VIEW OWN ( HOLD )</button>
+        <div class="h-[5vh] w-[80vw] lg:w-[50vh]" id="random-wrapper">
+            <div class="h-full w-full flex justify-center items-center gap-[10%]" id="random-inner-wrapper-1">
+                <button class="h-full w-[45%] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200" id="randomize-1">RANDOMIZE</button>
+                <button class="h-full w-[45%] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 flex justify-center items-center disabled:bg-slate-400 disabled:text-slate-200" id="ok-randomize-1">
+                    <span>OK</span>
+                    <img class="h-[60%] animate-spin hidden" id="loading-1" alt="loading-icon">
+                </button>
+            </div>
+            <div class="h-full w-full flex justify-center items-center gap-[10%] hidden" id="random-inner-wrapper-2">
+                <button class="h-full w-[45%] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200" id="randomize-2">RANDOMIZE</button>
+                <button class="h-full w-[45%] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 flex justify-center items-center disabled:bg-slate-400 disabled:text-slate-200" id="ok-randomize-2">
+                    <span>OK</span>
+                    <img class="h-[60%] animate-spin hidden" id="loading-2" alt="loading-icon">
+                </button>
+            </div>
+        </div>
+        <div class="h-[5vh] w-[80vw] flex justify-center items-center gap-[10%] lg:w-[50vh] hidden" id="view-wrapper">
+            <button class="h-full w-full bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200" id="view-1">VIEW OWN ( HOLD )</button>
+            <button class="h-full w-full bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 disabled:bg-transparent disabled:text-transparent hidden" id="view-2">VIEW OWN ( HOLD )</button>
         </div>
         <div class="h-full w-full absolute hidden" id="block-screen"></div>
         <div class="h-[15vh] w-full bg-slate-200 flex flex-col justify-evenly items-center fixed top-1/2 translate-y-[-50%] shadow-1110 hidden" id="main-end">
             <span class="text-xl" id="winner"></span>
             <div class="flex justify-center items-center gap-[20px]">
-                <button class="h-10 w-[150px] bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500" id="button-rematch">Rematch</button>
-                <button class="h-10 w-[150px] bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500" id="button-main-menu">Main Menu</button>
+                <button class="h-[5vh] w-[150px] bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500" id="button-rematch">Rematch</button>
+                <button class="h-[5vh] w-[150px] bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500" id="button-main-menu">Main Menu</button>
             </div>
         </div>
         <div class="h-[10vh] flex justify-center items-center text-slate-200 text-2xl">

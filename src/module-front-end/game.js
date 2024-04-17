@@ -14,8 +14,13 @@ const game = (() => {
 
     function createGame(name1, name2, mode) {
         _initPlayers(name1, name2);
-        dom.init(mode, ... players);
-        dom.activatePlayer(turn, notTurn);
+        dom.initPreGame(mode, ... players);
+        log.reset();
+    }
+
+    function run() {
+        log.message("Weapon's free!", 1);
+        _activateTurn();
         _AImove();
     }
 
@@ -33,9 +38,7 @@ const game = (() => {
             };
     
             _updateTurn();
-            dom.activatePlayer(turn, notTurn);
-            if (players[turn].name !== "AI") blocker.deactivateBlock("board");
-    
+            _activateTurn();
             _AImove();
         }, 1000)
     }
@@ -47,6 +50,11 @@ const game = (() => {
         players = [player1, player2];
         turn = getRandomInt(2);
         notTurn = +!turn;
+    }
+
+    function _activateTurn() {
+        dom.activatePlayer(turn, notTurn);
+        if (players[turn].name !== "AI") blocker.deactivateBlock("board");
     }
     
     function _AImove() {
@@ -72,7 +80,7 @@ const game = (() => {
         notTurn = temp;
     }
 
-    return { createGame, update };
+    return { createGame, run, update };
 })()
 
 export { game };
