@@ -1,27 +1,33 @@
 const blocker = (() => {
-    const blockBoard = document.querySelector("#block-board");
-    const blockScreen = document.querySelector("#block-screen");
+  const blockBoard = document.querySelector("#block-board");
+  const blockScreen = document.querySelector("#block-screen");
+  const blockRandomize = document.querySelector("#block-randomize");
 
-    function activateBlock(string) {
-        let element = null;
-        if (string === "board") element = blockBoard;
-        else if (string === "screen") element = blockScreen;
-        element.classList.remove("hidden");
-    }
+  const blocks = [blockBoard, blockScreen, blockRandomize];
 
-    function deactivateBlock(string) {
-        let element = null;
-        if (string === "board") element = blockBoard;
-        else if (string === "screen") element = blockScreen;
-        element.classList.add("hidden");
-    }
+  function activate(string) {
+    let element = null;
+    if (string === "board") element = blockBoard;
+    else if (string === "screen") element = blockScreen;
+    else if (string === "randomize") element = blockRandomize;
+    element.classList.remove("hidden");
+  }
 
-    function reset() {
-        blockBoard.classList.add("hidden");
-        blockScreen.classList.add("hidden");
-    }
+  function deactivate(string) {
+    let element = null;
+    if (string === "board") element = blockBoard;
+    else if (string === "screen") element = blockScreen;
+    else if (string === "randomize") element = blockRandomize;
+    element.classList.add("hidden");
+  }
 
-    return { activateBlock, deactivateBlock, reset };
-})()
+  function reset() {
+    blocks.forEach((block) => {
+      block.classList.add("hidden");
+    });
+  }
+
+  return { activate, deactivate, reset };
+})();
 
 export { blocker };

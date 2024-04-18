@@ -41,14 +41,14 @@
             <div class="text-lg font-bold" id="log-2"></div>
         </div>
         <div class="flex flex-col justify-center items-center gap-[5vh] lg:flex-row lg:gap-[5vw]">
-            <div class="flex flex-col justify-center items-center order-0 lg:order-1">
-                <div class="h-[10vw] w-full flex justify-between items-center lg:h-[5vh] lg:w-[50vh]">
+            <div class="flex flex-col justify-center items-center">
+                <div class="h-[10vw] w-[80vw] flex justify-between items-center lg:h-[5vh] lg:w-[50vh]">
                     <div class="h-full w-[40%] px-[5%] pt-[4%] flex justify-between items-center text-sm bg-slate-200 rounded-t-lg lg:text-lg" id="tab-1">
-                        <span class="max-w-[80%] overflow-hidden text-ellipsis" id="name-1"></span>
+                        <span class="w-[80%] overflow-hidden text-nowrap text-ellipsis" id="name-1"></span>
                         <span id="life-1"></span>
                     </div>
                     <div class="h-full w-[40%] px-[5%] pt-[4%] flex justify-between items-center text-sm bg-slate-400 rounded-t-lg lg:text-lg flex-row-reverse mb-2" id="tab-2">
-                        <span class="max-w-[80%] overflow-hidden text-ellipsis text-end" id="name-2"></span>
+                        <span class="w-[80%] overflow-hidden text-nowrap text-ellipsis text-end" id="name-2"></span>
                         <span id="life-2"></span>
                     </div>
                 </div>
@@ -70,6 +70,7 @@
             </div>
         </div>
         <div class="h-[5vh] w-[80vw] lg:w-[50vh]" id="random-wrapper">
+            <div class="h-[5vh] w-[45%] absolute hidden" id="block-randomize"></div>
             <div class="h-full w-full flex justify-center items-center gap-[10%]" id="random-inner-wrapper-1">
                 <button class="h-full w-[45%] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200" id="randomize-1">RANDOMIZE</button>
                 <button class="h-full w-[45%] bg-slate-200 rounded-lg hover:bg-slate-400 hover:text-slate-200 flex justify-center items-center disabled:bg-slate-400 disabled:text-slate-200" id="ok-randomize-1">

@@ -1,21 +1,20 @@
 const log = (() => {
-    const logDiv1 = document.querySelector("#log-1");
-    const logDiv2 = document.querySelector("#log-2");
+  const logDiv1 = document.querySelector("#log-1");
+  const logDiv2 = document.querySelector("#log-2");
 
-    function message(string, n) {
-        if (n === 1) {
-            reset();
-            logDiv1.textContent = string;
-        }
-        else if (n === 2) logDiv2.textContent = string;
-    }
+  function message(string, n) {
+    if (n === 1) {
+      reset();
+      logDiv1.textContent = string;
+    } else if (n === 2) logDiv2.textContent = string;
+  }
 
-    function reset() {
-        logDiv1.textContent = "Please choose your preferred formation";
-        logDiv2.textContent = "...";
-    }
+  function reset() {
+    logDiv1.textContent = "Please choose your preferred formation";
+    logDiv2.textContent = "...";
+  }
 
-    return { message, reset };
-})()
+  return { message, reset };
+})();
 
-export { log }
+export { log };
